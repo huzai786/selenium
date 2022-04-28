@@ -14,7 +14,14 @@ from selenium.webdriver.chrome.options import Options
 
 chrome_options = Options()
 chrome_options.add_argument("--enable-javascript")
-service = Service('/home/notme/Desktop/chromedriver')
+
+# For linux
+# service = Service('/home/notme/Desktop/chromedriver')  
+
+# For Window
+service = Service('C:\Program Files (x86)\chromedriver.exe')  
+
+
 driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
 driver.maximize_window()
 print('opening the webpage')
@@ -37,10 +44,10 @@ login_btn = driver.find_element_by_xpath('//*[@id="root"]/main/div/div/form/div[
 
 login_btn.click()
 driver.implicitly_wait(10)
-time.sleep(4)
+time.sleep(6)
 
 see_data_btn = driver.find_element_by_xpath('//*[@id="root"]/main/div/div[1]/div[2]/a')
-time.sleep(3)
+time.sleep(7)
 driver.implicitly_wait(10)
 
 see_data_btn.click()
@@ -56,7 +63,7 @@ driver.implicitly_wait(10)
 
 timer_toggle = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[2]/div[2]/label[1]')
 
-time.sleep(4)
+time.sleep(6)
 
 timer_toggle.click()
 
@@ -68,59 +75,23 @@ time.sleep(3)
 
 load_btn = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "button.m-navigate.m-left.css-1rmrtd0")))
 
-text = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[1]/p[1]/strong').text
+# actions.click_and_hold(load_btn)
 
-
-actions.move_to_element(load_btn)
-
-driver.implicitly_wait(3)
-
-actions.click_and_hold(load_btn)
-actions.click_and_hold(load_btn)
-print(text)
-
-actions.move_by_offset(xoffset=20, yoffset=-50)
-if text == 'Kl. 08-09 torsdag den 21. april brugte du':
+while True:
+    text = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[1]/p[1]/strong').text
+    # actions.move_to_element(load_btn)
+    actions.click_and_hold(load_btn)
+    actions.pause(0.9)
     actions.release(load_btn)
+    actions.move_by_offset(xoffset=30, yoffset=-50)
     print(text)
-    print('releasing')
+    actions.perform()
 
-actions.perform()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# print(text)
+# if text == '':
+#     actions.release(load_btn)
+#     print('releasing')
+#     actions.perform()
 
 
 
