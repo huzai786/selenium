@@ -8,10 +8,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 
+
+chrome_options = Options()
+chrome_options.add_argument("--enable-javascript")
 service = Service('/home/notme/Desktop/chromedriver')
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
+driver.maximize_window()
 print('opening the webpage')
 driver.get('https://selvbetjening.energi.seas-nve.dk/')
 
