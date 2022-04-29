@@ -1,5 +1,4 @@
 # SELENIUM ELECTRICITY PRICE DETECTER!
-import sys
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from bs4 import BeautifulSoup
@@ -16,10 +15,10 @@ chrome_options = Options()
 chrome_options.add_argument("--enable-javascript")
 
 # For linux
-# service = Service('/home/notme/Desktop/chromedriver')  
+service = Service('/home/notme/Desktop/chromedriver')
 
 # For Window
-service = Service('C:\Program Files (x86)\chromedriver.exe')  
+# service = Service('C:\Program Files (x86)\chromedriver.exe')
 
 
 driver = webdriver.Chrome(service=service, chrome_options=chrome_options)
@@ -47,7 +46,7 @@ driver.implicitly_wait(10)
 time.sleep(6)
 
 see_data_btn = driver.find_element_by_xpath('//*[@id="root"]/main/div/div[1]/div[2]/a')
-time.sleep(7)
+time.sleep(6)
 driver.implicitly_wait(10)
 
 see_data_btn.click()
@@ -63,7 +62,7 @@ driver.implicitly_wait(10)
 
 timer_toggle = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[2]/div[2]/label[1]')
 
-time.sleep(6)
+time.sleep(3)
 
 timer_toggle.click()
 
@@ -71,54 +70,36 @@ driver.implicitly_wait(3)
 time.sleep(3)
 
 
-# load_btn = driver.find_element_by_class_name('button.m-navigate.m-left.css-1rmrtd0')
-
-load_btn = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "button.m-navigate.m-left.css-1rmrtd0")))
-
 # actions.click_and_hold(load_btn)
 
 while True:
-    text = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[1]/p[1]/strong').text
+    time.sleep(2)
+    load_btn = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "button.m-navigate.m-left.css-1rmrtd0")))
+# data_elem = driver.find_element_by_xpath('//*[@id="consumption-bar-chart"]/div[1]')
     # actions.move_to_element(load_btn)
+    print('upper load btn code')
+    driver.implicitly_wait(10)
     actions.click_and_hold(load_btn)
-    actions.pause(0.9)
-    actions.release(load_btn)
-    actions.move_by_offset(xoffset=30, yoffset=-50)
+    print('clicking load button')
+    actions.pause(1.3)
+    # actions.click_and_hold(load_btn)
+# actions.move_to_element(data_elem)
+# actions.context_click(data_elem)
+    print('releasing button')
+    # actions.release(load_btn)
+    actions.move_by_offset(xoffset=20, yoffset=-50)
+    print('moving to offset _ _')
+    # actions.click_and_hold(load_btn)
+    text = driver.find_element_by_xpath('//*[@id="root"]/main/div[2]/div/div[1]/div[2]/div[1]/p[1]/strong').text
     print(text)
     actions.perform()
+    print('moving to next iteration')
 
-# print(text)
+
 # if text == '':
 #     actions.release(load_btn)
 #     print('releasing')
 #     actions.perform()
 
-
-
-
-
-
-
-
-
-
-
-# i = 0
-# while i < 1:
-#     try:
-#         load_old_data = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, 'button m-navigate m-left css-1rmrtd0')))
-#         print('Clicking to see old data!')
-#         load_old_data.click()
-#         time.sleep(1)
-#     except:
-#         i = 1
-# for i in range(20):
-    # print("clicking")
-    # old_data_btn.click()
-    # time.sleep(4)
-
-# driver.implicitly_wait(3)
-
-# action_chains.move_by_offset(200, 200).context_click().perform()
 
 
